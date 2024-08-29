@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Mail\GenericEmail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class EmailController extends Controller
 {
@@ -52,10 +54,14 @@ class EmailController extends Controller
      */
     public function send(Request $request)
     {
+
         //
         $to = $request->input('to');
         $from = $request->input('from');
         $body = $request->input('body');
+        $subject = $request->input('subject');
+
+        Mail::to($to)->send(new GenericEmail( $body, $subject, $from));
 
         return true;
     }
