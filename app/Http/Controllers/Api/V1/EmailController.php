@@ -57,6 +57,6 @@ class EmailController extends Controller
         $from = $request->input('from');
         $body = $request->input('body');
 
-        dd($to);
+        return true;
     }
 }
